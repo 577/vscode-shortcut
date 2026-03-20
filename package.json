@@ -2,7 +2,7 @@
   "name": "shortcut-menu-bar",
   "displayName": "Shortcut Menu Bar",
   "description": "Add handy buttons like beautify, show opened files, save, toggle terminal, activity bar etc to editor menu bar. User-defined buttons are also possible.",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "publisher": "jerrygoyal",
   "author": {
     "name": "Gourav Goyal"
@@ -48,74 +48,109 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "configuration": {
+      "title": "Shortcut Menu Bar",
+      "properties": {}
+    },
     "commands": [
       {
         "command": "ShortcutMenuBar.navigateBack",
-        "title": "Navigate back",
+        "title": "Go Back",
         "category": "ShortcutMenuBar",
-        "icon": {
-          "light": "images/triangle-left_light.svg",
-          "dark": "images/triangle-left.svg"
-        }
+        "icon": "$(arrow-left)"
       },
       {
         "command": "ShortcutMenuBar.navigateForward",
-        "title": "Navigate forward",
+        "title": "Go Forward",
         "category": "ShortcutMenuBar",
-        "icon": {
-          "light": "images/triangle-right_light.svg",
-          "dark": "images/triangle-right.svg"
-        }
+        "icon": "$(arrow-right)"
       },
       {
-        "command": "ShortcutMenuBar.beautify",
-        "title": "Beautify",
+        "command": "ShortcutMenuBar.format",
+        "title": "Format",
         "category": "ShortcutMenuBar",
-        "icon": {
-          "light": "images/format_light.svg",
-          "dark": "images/format.svg"
-        }
+        "icon": "$(wand)"
       },
       {
-        "command": "ShortcutMenuBar.toggleTerminal",
-        "title": "Toggle terminal",
+        "command": "ShortcutMenuBar.toggleTerminalOn",
+        "title": "Toggle Terminal",
         "category": "ShortcutMenuBar",
-        "icon": {
-          "light": "images/terminal_light.svg",
-          "dark": "images/terminal.svg"
-        }
+        "icon": "$(layout-panel-off)"
       },
       {
-        "command": "ShortcutMenuBar.compareWithSaved",
-        "title": "Compare with saved",
+        "command": "ShortcutMenuBar.toggleTerminalOff",
+        "title": "Toggle Terminal",
         "category": "ShortcutMenuBar",
-        "icon": {
-          "light": "images/compareWithSaved_light.svg",
-          "dark": "images/compareWithSaved.svg"
-        }
+        "icon": "$(layout-panel)"
+      },
+      {
+        "command": "ShortcutMenuBar.togglePrimarySideBarOn",
+        "title": "Toggle Primary Side Bar",
+        "category": "ShortcutMenuBar",
+        "icon": "$(layout-sidebar-left-off)"
+      },
+      {
+        "command": "ShortcutMenuBar.togglePrimarySideBarOff",
+        "title": "Toggle Primary Side Bar",
+        "category": "ShortcutMenuBar",
+        "icon": "$(layout-sidebar-left)"
+      },
+      {
+        "command": "ShortcutMenuBar.toggleSecondarySideBarOn",
+        "title": "Toggle Secondary Side Bar",
+        "category": "ShortcutMenuBar",
+        "icon": "$(layout-sidebar-right-off)"
+      },
+      {
+        "command": "ShortcutMenuBar.toggleSecondarySideBarOff",
+        "title": "Toggle Secondary Side Bar",
+        "category": "ShortcutMenuBar",
+        "icon": "$(layout-sidebar-right)"
       }
     ],
     "menus": {
       "editor/title": [
         {
           "command": "ShortcutMenuBar.navigateBack",
-          "group": "navigation@2"
+          "group": "navigation@1"
         },
         {
           "command": "ShortcutMenuBar.navigateForward",
+          "group": "navigation@2"
+        },
+        {
+          "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor",
+          "command": "ShortcutMenuBar.format",
           "group": "navigation@3"
         },
         {
-          "when": "!isInDiffEditor && !markdownPreviewFocus",
-          "command": "ShortcutMenuBar.beautify",
-          "group": "navigation@4"
-        },
-        {
-          "command": "ShortcutMenuBar.toggleTerminal",
+          "when": "!panelVisible",
+          "command": "ShortcutMenuBar.toggleTerminalOn",
           "group": "navigation@5"
         },
         {
-          "command": "ShortcutMenuBar.compareWithSaved",
+          "when": "panelVisible",
+          "command": "ShortcutMenuBar.toggleTerminalOff",
+          "group": "navigation@5"
+        },
+        {
+          "when": "!sideBarVisible",
+          "command": "ShortcutMenuBar.togglePrimarySideBarOn",
+          "group": "navigation@4"
+        },
+        {
+          "when": "sideBarVisible",
+          "command": "ShortcutMenuBar.togglePrimarySideBarOff",
+          "group": "navigation@4"
+        },
+        {
+          "when": "!auxiliaryBarVisible",
+          "command": "ShortcutMenuBar.toggleSecondarySideBarOn",
+          "group": "navigation@6"
+        },
+        {
+          "when": "auxiliaryBarVisible",
+          "command": "ShortcutMenuBar.toggleSecondarySideBarOff",
           "group": "navigation@6"
         }
       ]
@@ -128,7 +163,7 @@
     "lint": "eslint src --ext ts",
     "login": "vsce login jerrygoyal",
     "publish": "vsce publish",
-    "package": "vsce package"
+    "package": "vsce package && codium --uninstall-extension jerrygoyal.shortcut-menu-bar 2>/dev/null || true && codium --install-extension shortcut-menu-bar-3.0.5.vsix"
   },
   "devDependencies": {
     "@types/glob": "^7.2.0",
