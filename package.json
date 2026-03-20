@@ -46,7 +46,6 @@
   "activationEvents": [
     "onCommand:ShortcutMenuBar.navigateBack",
     "onCommand:ShortcutMenuBar.navigateForward",
-    "onCommand:ShortcutMenuBar.switchHeaderSource",
     "onCommand:ShortcutMenuBar.save",
     "onCommand:ShortcutMenuBar.beautify",
     "onCommand:ShortcutMenuBar.toggleRenderWhitespace",
@@ -99,12 +98,6 @@
             "type": "boolean",
             "default": true,
             "description": "show icon for 'Navigate forward'"
-          },
-          "ShortcutMenuBar.switchHeaderSource": {
-            "title": "Switch header source",
-            "type": "boolean",
-            "default": false,
-            "description": "show icon for 'Switch header/source'"
           },
           "ShortcutMenuBar.beautify": {
             "title": "Beautify selection/file",
@@ -288,15 +281,6 @@
         "icon": {
           "light": "images/triangle-right_light.svg",
           "dark": "images/triangle-right.svg"
-        }
-      },
-      {
-        "command": "ShortcutMenuBar.switchHeaderSource",
-        "title": "Switch Header/Source",
-        "category": "ShortcutMenuBar",
-        "icon": {
-          "light": "images/switch_light.svg",
-          "dark": "images/switch.svg"
         }
       },
       {
@@ -554,11 +538,6 @@
     ],
     "menus": {
       "editor/title": [
-        {
-          "when": "editorTextFocus && config.ShortcutMenuBar.switchHeaderSource",
-          "command": "ShortcutMenuBar.switchHeaderSource",
-          "group": "navigation@1"
-        },
         {
           "when": "config.ShortcutMenuBar.navigateBack",
           "command": "ShortcutMenuBar.navigateBack",

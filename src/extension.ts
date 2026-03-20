@@ -29,23 +29,9 @@ import {
   window,
 } from "vscode";
 
-var init = false;
-var hasCpp = false;
-
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: ExtensionContext) {
-  if (!init) {
-    init = true;
-
-    commands.getCommands().then(function (value) {
-      let result = value.indexOf("C_Cpp.SwitchHeaderSource");
-      if (result >= 0) {
-        hasCpp = true;
-      }
-    });
-  }
-
   console.log("extension is now active!");
 
   // rest of code
@@ -167,20 +153,6 @@ export function activate(context: ExtensionContext) {
     }
   );
 
-  let disposableSwitch = commands.registerCommand(
-    "ShortcutMenuBar.switchHeaderSource",
-    () => {
-      if (hasCpp) {
-        commands
-          .executeCommand("C_Cpp.SwitchHeaderSource")
-          .then(function () {});
-      } else {
-        window.showErrorMessage(
-          "C/C++ extension (ms-vscode.cpptools) is not installed!"
-        );
-      }
-    }
-  );
 
   // Adding 1) to a list of disposables which are disposed when this extension is deactivated
 
@@ -193,7 +165,6 @@ export function activate(context: ExtensionContext) {
   context.subscriptions.push(disposableFileList);
   context.subscriptions.push(disposableBeautify);
   context.subscriptions.push(disposableFormatWith);
-  context.subscriptions.push(disposableSwitch);
 }
 
 // this method is called when your extension is deactivated
