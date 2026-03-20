@@ -22,7 +22,6 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 // let fs = require("fs");
-import { basename, dirname, extname } from "path";
 import {
   commands,
   Disposable,
@@ -31,7 +30,6 @@ import {
   extensions,
   Uri,
   window,
-  workspace,
 } from "vscode";
 
 var init = false;
@@ -203,140 +201,10 @@ export function activate(context: ExtensionContext) {
   context.subscriptions.push(disposableBeautify);
   context.subscriptions.push(disposableFormatWith);
   context.subscriptions.push(disposableSwitch);
-
-  // Adding 3 // user defined userButtons
-  for (let index = 1; index <= 10; index++) {
-    const printIndex = index !== 10 ? "0" + index : "" + index;
-    let action = "userButton" + printIndex;
-    let actionName = "ShortcutMenuBar." + action;
-    let disposableUserButtonCommand = commands.registerCommand(
-      actionName,
-      () => {
-        const config = workspace.getConfiguration("ShortcutMenuBar");
-        let configName = action + "Command";
-        const command = config.get<String>(configName);
-
-        // skip userButtons not set
-        if (
-          command === null ||
-          command === undefined ||
-          command.trimEnd() === ""
-        ) {
-          return;
-        }
-
-        const palettes = command.split(",");
-        executeNext(action, palettes, 0);
-      }
-    );
-    context.subscriptions.push(disposableUserButtonCommand);
-  }
-
-  //also update userButton in package.json.. see "Adding new userButtons" in help.md file
 }
 
 // this method is called when your extension is deactivated
 export function deactivate() {}
-
-// local functions for user-defined button execution follow, based on
-// https://github.com/ppatotski/vscode-commandbar/ Copyright 2018 Petr Patotski
-
-function executeNext(action: String, palettes: String[], index: number) {
-  try {
-    let [cmd, ...args] = palettes[index].split("|");
-    if (args) {
-      args = args.map((arg) => resolveVariables(arg));
-    }
-    cmd = cmd.trim();
-    commands.executeCommand(cmd, ...args).then(
-      () => {
-        index++;
-        if (index < palettes.length) {
-          executeNext(action, palettes, index);
-        }
-      },
-      (err: any) => {
-        window.showErrorMessage(
-          `Execution of '${action}' command has failed: ${err.message}`
-        );
-      }
-    );
-  } catch (err: any) {
-    window.showErrorMessage(
-      `Execution of '${action}' command has failed: ${err.message}`
-    );
-    console.error(err);
-  }
-}
-
-const resolveVariablesFunctions = {
-  env: (name) => process.env[name.toUpperCase()],
-  cwd: () => process.cwd(),
-  workspaceRoot: () => getWorkspaceFolder(),
-  workspaceFolder: () => getWorkspaceFolder(),
-  workspaceRootFolderName: () => basename(getWorkspaceFolder()),
-  workspaceFolderBasename: () => basename(getWorkspaceFolder()),
-  lineNumber: () => window.activeTextEditor?.selection.active.line,
-  selectedText: () =>
-    window.activeTextEditor?.document.getText(
-      window.activeTextEditor.selection
-    ),
-  file: () => getActiveEditorName(),
-  fileDirname: () => dirname(getActiveEditorName()),
-  fileExtname: () => extname(getActiveEditorName()),
-  fileBasename: () => basename(getActiveEditorName()),
-  fileBasenameNoExtension: () => {
-    const edtBasename = basename(getActiveEditorName());
-    return edtBasename.slice(
-      0,
-      edtBasename.length - extname(edtBasename).length
-    );
-  },
-  execPath: () => process.execPath,
-};
-
-const variableRegEx = /\$\{(.*?)\}/g;
-function resolveVariables(commandLine: String) {
-  return commandLine
-    .trim()
-    .replace(variableRegEx, function replaceVariable(match, variableValue) {
-      const [variable, argument] = variableValue.split(":");
-      const resolver = resolveVariablesFunctions[variable];
-      if (!resolver) {
-        throw new Error(`Variable ${variable} not found!`);
-      }
-
-      return resolver(argument);
-    });
-}
-
-function getActiveEditorName() {
-  if (window.activeTextEditor) {
-    return window.activeTextEditor.document.fileName;
-  }
-  return "";
-}
-
-function getWorkspaceFolder(activeTextEditor = window.activeTextEditor) {
-  let folder;
-  if (workspace?.workspaceFolders) {
-    if (workspace.workspaceFolders.length === 1) {
-      folder = workspace.workspaceFolders[0].uri.fsPath;
-    } else if (activeTextEditor) {
-      const folderObject = workspace.getWorkspaceFolder(
-        activeTextEditor.document.uri
-      );
-      if (folderObject) {
-        folder = folderObject.uri.fsPath;
-      } else {
-        folder = "";
-      }
-    } else if (workspace.workspaceFolders.length > 0) {
-      folder = workspace.workspaceFolders[0].uri.fsPath;
-    }
-  }
-  return folder;
-}
 
 // https://stackoverflow.com/a/66303259/3073272
 function isMajorUpdate(previousVersion: string, currentVersion: string) {
