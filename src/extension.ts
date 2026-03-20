@@ -39,49 +39,16 @@ export function activate(context: ExtensionContext) {
   let commandArray = [
     //=> ["name in package.json" , "name of command to execute"]
 
-    ["ShortcutMenuBar.save", "workbench.action.files.save"],
     [
       "ShortcutMenuBar.toggleTerminal",
       "workbench.action.terminal.toggleTerminal",
     ],
-    [
-      "ShortcutMenuBar.toggleActivityBar",
-      "workbench.action.toggleActivityBarVisibility",
-    ],
     ["ShortcutMenuBar.navigateBack", "workbench.action.navigateBack"],
     ["ShortcutMenuBar.navigateForward", "workbench.action.navigateForward"],
-    [
-      "ShortcutMenuBar.toggleRenderWhitespace",
-      "editor.action.toggleRenderWhitespace",
-    ],
-    ["ShortcutMenuBar.quickOpen", "workbench.action.quickOpen"],
-    ["ShortcutMenuBar.findReplace", "editor.action.startFindReplaceAction"],
-    ["ShortcutMenuBar.undo", "undo"],
-    ["ShortcutMenuBar.redo", "redo"],
-    ["ShortcutMenuBar.commentLine", "editor.action.commentLine"],
-    ["ShortcutMenuBar.saveAll", "workbench.action.files.saveAll"],
-    ["ShortcutMenuBar.openFile", "workbench.action.files.openFile"],
-    ["ShortcutMenuBar.newFile", "workbench.action.files.newUntitledFile"],
-    ["ShortcutMenuBar.goToDefinition", "editor.action.revealDefinition"],
-    ["ShortcutMenuBar.cut", "editor.action.clipboardCutAction"],
-    ["ShortcutMenuBar.copy", "editor.action.clipboardCopyAction"],
-    ["ShortcutMenuBar.paste", "editor.action.clipboardPasteAction"],
     [
       "ShortcutMenuBar.compareWithSaved",
       "workbench.files.action.compareWithSaved",
     ],
-    ["ShortcutMenuBar.showCommands", "workbench.action.showCommands"],
-    ["ShortcutMenuBar.startDebugging", "workbench.action.debug.start"],
-
-    ["ShortcutMenuBar.indentLines", "editor.action.indentLines"],
-    ["ShortcutMenuBar.outdentLines", "editor.action.outdentLines"],
-    ["ShortcutMenuBar.openSettings", "workbench.action.openSettings"],
-    ["ShortcutMenuBar.toggleWordWrap", "editor.action.toggleWordWrap"],
-    [
-      "ShortcutMenuBar.changeEncoding",
-      "workbench.action.editor.changeEncoding",
-    ],
-    ["ShortcutMenuBar.powershellRestartSession", "PowerShell.RestartSession"],
   ];
 
   let disposableCommandsArray: Disposable[] = [];
@@ -119,41 +86,6 @@ export function activate(context: ExtensionContext) {
     }
   );
 
-  let disposableFormatWith = commands.registerCommand(
-    "ShortcutMenuBar.formatWith",
-    () => {
-      let editor = window.activeTextEditor;
-      if (!editor) {
-        return; // No open text editor
-      }
-
-      if (window.state.focused === true && !editor.selection.isEmpty) {
-        commands
-          .executeCommand("editor.action.formatSelection.multiple")
-          .then(function () {});
-      } else {
-        commands
-          .executeCommand("editor.action.formatDocument.multiple")
-          .then(function () {});
-      }
-    }
-  );
-
-  // see opened files list
-  let disposableFileList = commands.registerCommand(
-    "ShortcutMenuBar.openFilesList",
-    () => {
-      let editor = window.activeTextEditor;
-      if (!editor || !editor.viewColumn) {
-        return; // No open text editor
-      }
-      commands
-        .executeCommand("workbench.action.showAllEditorsByMostRecentlyUsed")
-        .then(function () {});
-    }
-  );
-
-
   // Adding 1) to a list of disposables which are disposed when this extension is deactivated
 
   disposableCommandsArray.forEach((i) => {
@@ -162,9 +94,7 @@ export function activate(context: ExtensionContext) {
 
   // Adding 2) to a list of disposables which are disposed when this extension is deactivated
 
-  context.subscriptions.push(disposableFileList);
   context.subscriptions.push(disposableBeautify);
-  context.subscriptions.push(disposableFormatWith);
 }
 
 // this method is called when your extension is deactivated
