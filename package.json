@@ -44,226 +44,10 @@
     "button"
   ],
   "activationEvents": [
-    "onCommand:ShortcutMenuBar.navigateBack",
-    "onCommand:ShortcutMenuBar.navigateForward",
-    "onCommand:ShortcutMenuBar.save",
-    "onCommand:ShortcutMenuBar.beautify",
-    "onCommand:ShortcutMenuBar.toggleRenderWhitespace",
-    "onCommand:ShortcutMenuBar.openFilesList",
-    "onCommand:ShortcutMenuBar.toggleTerminal",
-    "onCommand:ShortcutMenuBar.toggleActivityBar",
-    "onCommand:ShortcutMenuBar.quickOpen",
-    "onCommand:ShortcutMenuBar.findReplace",
-    "onCommand:ShortcutMenuBar.undo",
-    "onCommand:ShortcutMenuBar.redo",
-    "onCommand:ShortcutMenuBar.commentLine",
-    "onCommand:ShortcutMenuBar.saveAll",
-    "onCommand:ShortcutMenuBar.formatWith",
-    "onCommand:ShortcutMenuBar.openFile",
-    "onCommand:ShortcutMenuBar.newFile",
-    "onCommand:ShortcutMenuBar.goToDefinition",
-    "onCommand:ShortcutMenuBar.cut",
-    "onCommand:ShortcutMenuBar.copy",
-    "onCommand:ShortcutMenuBar.paste",
-    "onCommand:ShortcutMenuBar.compareWithSaved",
-    "onCommand:ShortcutMenuBar.showCommands",
-    "onCommand:ShortcutMenuBar.startDebugging",
-    "onCommand:ShortcutMenuBar.indentLines",
-    "onCommand:ShortcutMenuBar.outdentLines",
-    "onCommand:ShortcutMenuBar.openSettings",
-    "onCommand:ShortcutMenuBar.toggleWordWrap",
-    "onCommand:ShortcutMenuBar.changeEncoding",
-    "onCommand:ShortcutMenuBar.powershellRestartSession"
+    "*"
   ],
   "main": "./out/extension.js",
   "contributes": {
-    "configuration": [
-      {
-        "title": "Shortcut Menu Bar configuration",
-        "properties": {
-          "ShortcutMenuBar.save": {
-            "title": "Save active file",
-            "type": "boolean",
-            "default": false,
-            "description": "show icon for 'Save file'"
-          },
-          "ShortcutMenuBar.navigateBack": {
-            "title": "Navigate back",
-            "type": "boolean",
-            "default": true,
-            "description": "show icon for 'Navigate back'"
-          },
-          "ShortcutMenuBar.navigateForward": {
-            "title": "Navigate forward",
-            "type": "boolean",
-            "default": true,
-            "description": "show icon for 'Navigate forward'"
-          },
-          "ShortcutMenuBar.beautify": {
-            "title": "Beautify selection/file",
-            "type": "boolean",
-            "default": true,
-            "description": "show icon for 'Beautify/Format selection or file'"
-          },
-          "ShortcutMenuBar.toggleRenderWhitespace": {
-            "title": "Toggle render whitespace",
-            "type": "boolean",
-            "default": false,
-            "description": "show icon for 'Toggle render whitespace'"
-          },
-          "ShortcutMenuBar.openFilesList": {
-            "title": "show opened files list",
-            "type": "boolean",
-            "default": true,
-            "description": "show icon for 'Opened files list'"
-          },
-          "ShortcutMenuBar.toggleTerminal": {
-            "title": "Toggle terminal",
-            "type": "boolean",
-            "default": true,
-            "description": "show icon for 'Toggle terminal'"
-          },
-          "ShortcutMenuBar.toggleActivityBar": {
-            "title": "Toggle activity bar",
-            "type": "boolean",
-            "default": false,
-            "description": "show icon for 'Toggle activity bar'"
-          },
-          "ShortcutMenuBar.quickOpen": {
-            "title": "Quick open",
-            "type": "boolean",
-            "default": false,
-            "description": "show icon for Go to File, 'Quick Open'"
-          },
-          "ShortcutMenuBar.findReplace": {
-            "title": "Find replace",
-            "type": "boolean",
-            "default": false,
-            "description": "show icon for 'Find/Replace in active file'"
-          },
-          "ShortcutMenuBar.undo": {
-            "title": "Undo",
-            "type": "boolean",
-            "default": false,
-            "description": "show icon for 'Undo'"
-          },
-          "ShortcutMenuBar.redo": {
-            "title": "Redo",
-            "type": "boolean",
-            "default": false,
-            "description": "show icon for 'Redo'"
-          },
-          "ShortcutMenuBar.commentLine": {
-            "title": "Toggle line comment",
-            "type": "boolean",
-            "default": false,
-            "description": "show icon for 'Toggle line comment'"
-          },
-          "ShortcutMenuBar.saveAll": {
-            "title": "Save all",
-            "type": "boolean",
-            "default": false,
-            "description": "show icon for 'Save all'"
-          },
-          "ShortcutMenuBar.formatWith": {
-            "title": "Format selection/file with",
-            "type": "boolean",
-            "default": false,
-            "description": "show icon for 'Format selection/file with...'"
-          },
-          "ShortcutMenuBar.openFile": {
-            "title": "Open file",
-            "type": "boolean",
-            "default": false,
-            "description": "show icon for 'Open File'"
-          },
-          "ShortcutMenuBar.newFile": {
-            "title": "New file",
-            "type": "boolean",
-            "default": false,
-            "description": "show icon for 'New File'"
-          },
-          "ShortcutMenuBar.goToDefinition": {
-            "title": "Go to definition",
-            "type": "boolean",
-            "default": false,
-            "description": "show icon for 'Go to definition'"
-          },
-          "ShortcutMenuBar.cut": {
-            "title": "Cut",
-            "type": "boolean",
-            "default": false,
-            "description": "show icon for 'Cut'"
-          },
-          "ShortcutMenuBar.copy": {
-            "title": "Copy",
-            "type": "boolean",
-            "default": false,
-            "description": "show icon for 'Copy'"
-          },
-          "ShortcutMenuBar.paste": {
-            "title": "Paste",
-            "type": "boolean",
-            "default": false,
-            "description": "show icon for 'Paste'"
-          },
-          "ShortcutMenuBar.compareWithSaved": {
-            "title": "Compare with saved",
-            "type": "boolean",
-            "default": false,
-            "description": "show icon for 'Compare active file with saved'"
-          },
-          "ShortcutMenuBar.showCommands": {
-            "title": "Open command pallet",
-            "type": "boolean",
-            "default": false,
-            "description": "show icon for 'Open command pallet / Show all commands'"
-          },
-          "ShortcutMenuBar.startDebugging": {
-            "title": "Start debugging",
-            "type": "boolean",
-            "default": false,
-            "description": "show icon for 'Start debugging'"
-          },
-          "ShortcutMenuBar.indentLines": {
-            "title": "Indent lines",
-            "type": "boolean",
-            "default": false,
-            "description": "show icon for 'Indent Lines'"
-          },
-          "ShortcutMenuBar.outdentLines": {
-            "title": "Outdent lines",
-            "type": "boolean",
-            "default": false,
-            "description": "show icon for 'Outdent Lines'"
-          },
-          "ShortcutMenuBar.openSettings": {
-            "title": "Open settings",
-            "type": "boolean",
-            "default": false,
-            "description": "show icon for 'Open settings'"
-          },
-          "ShortcutMenuBar.toggleWordWrap": {
-            "title": "Toggle word wrap",
-            "type": "boolean",
-            "default": false,
-            "description": "show icon for 'Toggle word wrap'"
-          },
-          "ShortcutMenuBar.changeEncoding": {
-            "title": "Change file encoding",
-            "type": "boolean",
-            "default": false,
-            "description": "show icon for 'Change file encoding'"
-          },
-          "ShortcutMenuBar.powershellRestartSession": {
-            "title": "Restart PowerShell session",
-            "type": "boolean",
-            "default": false,
-            "description": "show icon for 'Restart PowerShell session'"
-          }
-        }
-      }
-    ],
     "commands": [
       {
         "command": "ShortcutMenuBar.navigateBack",
@@ -539,152 +323,131 @@
     "menus": {
       "editor/title": [
         {
-          "when": "config.ShortcutMenuBar.navigateBack",
           "command": "ShortcutMenuBar.navigateBack",
           "group": "navigation@2"
         },
         {
-          "when": "config.ShortcutMenuBar.navigateForward",
           "command": "ShortcutMenuBar.navigateForward",
           "group": "navigation@3"
         },
         {
-          "when": "!isInDiffEditor && !markdownPreviewFocus && config.ShortcutMenuBar.save",
+          "when": "!isInDiffEditor && !markdownPreviewFocus",
           "command": "ShortcutMenuBar.save",
           "group": "navigation@4"
         },
         {
-          "when": "!isInDiffEditor && !markdownPreviewFocus && config.ShortcutMenuBar.beautify",
+          "when": "!isInDiffEditor && !markdownPreviewFocus",
           "command": "ShortcutMenuBar.beautify",
           "group": "navigation@5"
         },
         {
-          "when": "config.ShortcutMenuBar.toggleRenderWhitespace",
           "command": "ShortcutMenuBar.toggleRenderWhitespace",
           "group": "navigation@6"
         },
         {
-          "when": "!isInDiffEditor && !markdownPreviewFocus && config.ShortcutMenuBar.openFilesList",
+          "when": "!isInDiffEditor && !markdownPreviewFocus",
           "command": "ShortcutMenuBar.openFilesList",
           "group": "navigation@7"
         },
         {
-          "when": "config.ShortcutMenuBar.toggleTerminal",
           "command": "ShortcutMenuBar.toggleTerminal",
           "group": "navigation@8"
         },
         {
-          "when": "config.ShortcutMenuBar.toggleActivityBar",
           "command": "ShortcutMenuBar.toggleActivityBar",
           "group": "navigation@9"
         },
         {
-          "when": "config.ShortcutMenuBar.quickOpen",
           "command": "ShortcutMenuBar.quickOpen",
           "group": "navigation@10"
         },
         {
-          "when": "config.ShortcutMenuBar.findReplace",
           "command": "ShortcutMenuBar.findReplace",
           "group": "navigation@11"
         },
         {
-          "when": "textInputFocus && !editorReadonly && config.ShortcutMenuBar.undo",
+          "when": "textInputFocus && !editorReadonly",
           "command": "ShortcutMenuBar.undo",
           "group": "navigation@12"
         },
         {
-          "when": "textInputFocus && !editorReadonly && config.ShortcutMenuBar.redo",
+          "when": "textInputFocus && !editorReadonly",
           "command": "ShortcutMenuBar.redo",
           "group": "navigation@13"
         },
         {
-          "when": "editorTextFocus && !editorReadonly && config.ShortcutMenuBar.commentLine",
+          "when": "editorTextFocus && !editorReadonly",
           "command": "ShortcutMenuBar.commentLine",
           "group": "navigation@14"
         },
         {
-          "when": "config.ShortcutMenuBar.saveAll",
           "command": "ShortcutMenuBar.saveAll",
           "group": "navigation@15"
         },
         {
-          "when": "!isInDiffEditor && !markdownPreviewFocus && config.ShortcutMenuBar.formatWith",
+          "when": "!isInDiffEditor && !markdownPreviewFocus",
           "command": "ShortcutMenuBar.formatWith",
           "group": "navigation@16"
         },
         {
-          "when": "config.ShortcutMenuBar.openFile",
           "command": "ShortcutMenuBar.openFile",
           "group": "navigation@17"
         },
         {
-          "when": "config.ShortcutMenuBar.newFile",
           "command": "ShortcutMenuBar.newFile",
           "group": "navigation@18"
         },
         {
-          "when": "config.ShortcutMenuBar.goToDefinition && editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor",
+          "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor",
           "command": "ShortcutMenuBar.goToDefinition",
           "group": "navigation@19"
         },
         {
-          "when": "config.ShortcutMenuBar.cut",
           "command": "ShortcutMenuBar.cut",
           "group": "navigation@20"
         },
         {
-          "when": "config.ShortcutMenuBar.copy",
           "command": "ShortcutMenuBar.copy",
           "group": "navigation@21"
         },
         {
-          "when": "config.ShortcutMenuBar.paste",
           "command": "ShortcutMenuBar.paste",
           "group": "navigation@22"
         },
         {
-          "when": "config.ShortcutMenuBar.compareWithSaved",
           "command": "ShortcutMenuBar.compareWithSaved",
           "group": "navigation@23"
         },
         {
-          "when": "config.ShortcutMenuBar.showCommands",
           "command": "ShortcutMenuBar.showCommands",
           "group": "navigation@24"
         },
         {
-          "when": "config.ShortcutMenuBar.startDebugging && debuggersAvailable && !inDebugMode",
+          "when": "debuggersAvailable && !inDebugMode",
           "command": "ShortcutMenuBar.startDebugging",
           "group": "navigation@25"
         },
         {
-          "when": "config.ShortcutMenuBar.indentLines",
           "command": "ShortcutMenuBar.indentLines",
           "group": "navigation@26"
         },
         {
-          "when": "config.ShortcutMenuBar.outdentLines",
           "command": "ShortcutMenuBar.outdentLines",
           "group": "navigation@27"
         },
         {
-          "when": "config.ShortcutMenuBar.openSettings",
           "command": "ShortcutMenuBar.openSettings",
           "group": "navigation@28"
         },
         {
-          "when": "config.ShortcutMenuBar.toggleWordWrap",
           "command": "ShortcutMenuBar.toggleWordWrap",
           "group": "navigation@29"
         },
         {
-          "when": "config.ShortcutMenuBar.changeEncoding",
           "command": "ShortcutMenuBar.changeEncoding",
           "group": "navigation@30"
         },
         {
-          "when": "config.ShortcutMenuBar.powershellRestartSession",
           "command": "ShortcutMenuBar.powershellRestartSession",
           "group": "navigation@31"
         }
