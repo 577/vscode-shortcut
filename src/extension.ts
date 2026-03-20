@@ -25,17 +25,13 @@
 import {
   commands,
   Disposable,
-  env,
   ExtensionContext,
-  extensions,
-  Uri,
   window,
 } from "vscode";
 
 var init = false;
 var hasCpp = false;
 
-const extensionId = "jerrygoyal.shortcut-menu-bar";
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: ExtensionContext) {
@@ -51,9 +47,6 @@ export function activate(context: ExtensionContext) {
   }
 
   console.log("extension is now active!");
-
-  // show notification on major release
-  showWhatsNew(context);
 
   // rest of code
   // Step: If simple commands then add to this array
@@ -205,56 +198,3 @@ export function activate(context: ExtensionContext) {
 
 // this method is called when your extension is deactivated
 export function deactivate() {}
-
-// https://stackoverflow.com/a/66303259/3073272
-function isMajorUpdate(previousVersion: string, currentVersion: string) {
-  // rain-check for malformed string
-  if (previousVersion.indexOf(".") === -1) {
-    return true;
-  }
-  //returns int array [1,1,1] i.e. [major,minor,patch]
-  var previousVerArr = previousVersion.split(".").map(Number);
-  var currentVerArr = currentVersion.split(".").map(Number);
-
-  if (currentVerArr[0] > previousVerArr[0]) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-async function showWhatsNew(context: ExtensionContext) {
-  try {
-    const previousVersion = context.globalState.get<string>(extensionId);
-    const currentVersion =
-      extensions.getExtension(extensionId)!.packageJSON.version;
-
-    // store latest version
-    context.globalState.update(extensionId, currentVersion);
-
-    if (
-      previousVersion === undefined ||
-      isMajorUpdate(previousVersion, currentVersion)
-    ) {
-      // show whats new notificatin:
-      const actions = [{ title: "See how" }];
-
-      const result = await window.showInformationMessage(
-        `Shortcut Menubar v${currentVersion} — Add your own buttons!`,
-        ...actions
-      );
-
-      if (result !== null) {
-        if (result === actions[0]) {
-          await env.openExternal(
-            Uri.parse(
-              "https://github.com/GorvGoyl/Shortcut-Menu-Bar-VSCode-Extension#create-buttons-with-custom-commands"
-            )
-          );
-        }
-      }
-    }
-  } catch (e) {
-    console.log("Error", e);
-  }
-}
